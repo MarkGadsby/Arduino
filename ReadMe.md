@@ -1,8 +1,6 @@
-Arduino sketches and notes
-==========================
+# Arduino sketches and notes
 
-Cube
-----
+## Cube
 
 ### Snake game notes
 
