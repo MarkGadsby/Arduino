@@ -16,7 +16,8 @@ This is how we can index a single LED -
 Here is the pin layout proposal -  
 C = Column  
 L = Layer  
-![alt text](MorePins.png "Extended pins") 
+![alt text](MorePins.png "Extended pins")   
+![alt text](ArrowCodes.png) 
 
 
  
