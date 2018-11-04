@@ -127,6 +127,7 @@ void CCube::SnakeForwardBackward()
 
 void CCube::EachColumnsLine()
 {
+	AllHigh();			// all off
 	int y = 0;
 
 	while (y <= 3) // y == 0,1,2 & 3 

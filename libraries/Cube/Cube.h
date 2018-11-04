@@ -19,10 +19,10 @@ class CCube
 		void LayerSweep();
 		void SnakeForwardBackward();
 		void EachColumnsLine();
-
+	void SnakeForward();
+	
 	private:
 		void LightLayer(int nLayer);
-		void SnakeForward();
 		void SnakeBackward();
 
 		// Column array

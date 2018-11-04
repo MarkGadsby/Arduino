@@ -8,5 +8,5 @@ void setup()
 
 void loop()
 {
-  cube.LayerSweep();
+  cube.EachColumnsLine();
 }
