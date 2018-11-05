@@ -14,6 +14,7 @@ class CCubeSnake
 		virtual ~CCubeSnake();
 		
 		void ColumnsLow();
+		void LightLayer(int nLayer);
 
 	private:
 
