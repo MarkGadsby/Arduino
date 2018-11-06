@@ -9,16 +9,13 @@ void setup()
 
 void loop()
 {
-	cubeSnake.ColumnsLow();
-	delay(500);
-	cubeSnake.LightLayer(0);
-	delay(500);
-	cubeSnake.LightLayer(1);
-	delay(500);
-	cubeSnake.LightLayer(2);
-	delay(500);
-	cubeSnake.LightLayer(3);
-	delay(500);
+  cubeSnake.LightLayer(0);
+  delay(250);
+  cubeSnake.LightLayer(1);
+  delay(250);
+  cubeSnake.LightLayer(2);
+  delay(250);
+  cubeSnake.LightLayer(3);
+  delay(250);  
 }
-
 
