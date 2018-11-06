@@ -1,22 +1,23 @@
-#include <CubeSnake.h>
+#include "CubeSnake.h"
 
-CCubeSnake cube;
+CCubeSnake cubeSnake;
 
 void setup()
 {
+	cubeSnake.SetUp();
 }
 
 void loop()
 {
-	cube.ColumnsLow();
+	cubeSnake.ColumnsLow();
 	delay(500);
-	cube.LightLayer(0);
+	cubeSnake.LightLayer(0);
 	delay(500);
-	cube.LightLayer(1);
+	cubeSnake.LightLayer(1);
 	delay(500);
-	cube.LightLayer(2);
+	cubeSnake.LightLayer(2);
 	delay(500);
-	cube.LightLayer(3);
+	cubeSnake.LightLayer(3);
 	delay(500);
 }
 

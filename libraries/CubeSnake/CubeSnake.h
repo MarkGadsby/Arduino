@@ -1,7 +1,7 @@
 #ifndef CUBESNAKE_H
 #define CUBESNAKE_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 const int NUMCOLS = 16;
 const int NUMLAYS = 4;
@@ -12,7 +12,9 @@ class CCubeSnake
 	public:
 		CCubeSnake();
 		virtual ~CCubeSnake();
-		
+
+		void SetUp();
+
 		void ColumnsLow();
 		void LightLayer(int nLayer);
 
