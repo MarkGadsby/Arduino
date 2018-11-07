@@ -17,6 +17,8 @@ class CCubeSnake
 
 		void ColumnsLow();
 		void LightLayer(int nLayer);
+		void ColumnsHigh();
+		void LightByIndex(int index);		
 
 	private:
 

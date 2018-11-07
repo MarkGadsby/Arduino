@@ -41,6 +41,21 @@ void CCubeSnake::ColumnsLow()
 		digitalWrite(m_Columns[i], LOW);
 }
 
+void CCubeSnake::ColumnsHigh()
+{
+	int i = NUMCOLS;
+
+	// all columns (negatives) high.
+	while (i--)
+		digitalWrite(m_Columns[i], HIGH);
+}
+
+void CCubeSnake::LightByIndex(int index)
+{
+	LightLayer(index / 16);
+	digitalWrite(m_Columns[index % 16], LOW);
+}
+
 void CCubeSnake::LightLayer(int nLayer)
 {
 	int layerPattern = 0xF0;
