@@ -16,9 +16,7 @@ This is how we can index a single LED -
 ![alt text](Indexing.png)
   
 Here is the pin layout proposal -  
-C = Column  
-L = Layer  
-![alt text](MorePins.png "Extended pins")   
+![](MCP23017Ports.png)
 
 
  
