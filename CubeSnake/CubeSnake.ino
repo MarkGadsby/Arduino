@@ -5,18 +5,18 @@ CCubeSnake cubeSnake;
 void setup()
 {
 	cubeSnake.SetUp();
+  Serial.begin(9600);  
 }
 
 void loop()
 {
-  int i = 0;
+  int incoming = 63;
 
-  while (i <= 63)
-  {  
+  if (Serial.available())
+  {
+    incoming = Serial.read();
     cubeSnake.ColumnsHigh();
-    cubeSnake.LightByIndex(i++);
-    delay(250);
+    cubeSnake.LightByIndex(incoming);
   }
-  delay(1000);
 }
 
