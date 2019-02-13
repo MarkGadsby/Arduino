@@ -1,6 +1,7 @@
 # Arduino sketches and notes
 
 * [SnowFlake](https://create.arduino.cc/projecthub/tyjoh_tech/freeform-snowflake-dc34a8?utm_campaign=new_projects&utm_content=1&utm_medium=email&utm_source=hackster&utm_term=project_name)
+* [Light box](https://create.arduino.cc/projecthub/mircemk/arduino-bluetooth-controlled-matrix-with-scrolling-text-d81cbd?ref=user&ref_id=168805&offset=2)
 
 ## Cube
 
