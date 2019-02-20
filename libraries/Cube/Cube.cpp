@@ -80,17 +80,17 @@ void CCube::LayerSweep()
 	}
 }
 
-svoid CCube::AlternateLayers()
+void CCube::AlternateLayers()
 {
 	int nHalfSecs = 10;
-	
+
 	while (nHalfSecs--)
 	{
 		AllLow();
 		LayersOdd();
 		delay(500);
 		AllLow();
-		LayersEven()
+		LayersEven();
 		delay(500);
 	}
 }
@@ -146,7 +146,7 @@ void CCube::BlockCheckerOdd(int mSec)
 	} while(millis() < start + mSec);
 }
 
-void BlockCheckerEven(int mSec)
+void CCube::BlockCheckerEven(int mSec)
 {
 	unsigned long start = millis();
 
@@ -163,10 +163,10 @@ void BlockCheckerEven(int mSec)
 	} while(millis() < start + mSec);
 }
 
-void MiddleBlock()
+void CCube::MiddleBlock()
 {
-	int nHalfSecs = 10;
-	
+	int nHalfSecs = 1;
+
 	while (nHalfSecs--)
 	{
 		AllLow();
@@ -237,18 +237,24 @@ void CCube::ColumnsFL_BR()
 	{
 		for (int x =0; x < NUM_X_Y; x++)
 		{
-			digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+			if ((y == 0 || y == 1) && (x == 0 || x == 1))
+				digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+			if ((x == 2 || x == 3) && (y == 2 || y == 3))
+				digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
 		}
 	}
 }
 
-void CCube:: ColumnsBR_FL()
+void CCube:: ColumnsFR_BL()
 {
 	for (int y = 0; y < NUM_X_Y; y++)
 	{
 		for (int x =0; x < NUM_X_Y; x++)
 		{
-			digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+			if ((y == 0 || y == 1) && (x == 2 || x == 3))
+				digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+			if ((x == 0 || x == 1) && (y == 2 || y == 3))
+				digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
 		}
 	}
 }
@@ -259,8 +265,8 @@ void CCube::ColumnsMiddle()
 	{
 		for (int x =0; x < NUM_X_Y; x++)
 		{
-			if ((x == 0 || x == 3) &&
-				(y == 0 || y == 3))
+			if ((x == 0 || x == 3) ||
+					(y == 0 || y == 3))
 			{
 				digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
 			}

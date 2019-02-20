@@ -18,13 +18,15 @@ public:		// interface
 
 	void LayerSweep();
 	void AlternateLayers();
-	
+
+	void MiddleBlock();
+
 	void CheckerOdd(int mSec);
 	void CheckerEven(int mSec);
 
 	void BlockCheckerOdd(int mSec);
 	void BlockCheckerEven(int mSec);
-	
+
 private:	// data
 
 	// Column array
@@ -32,7 +34,7 @@ private:	// data
 
 	// Layer array
 	int m_Layers[NUMLAYS] = {A2, A3, A4, A5};
-	
+
 private:	// Helpers
 	void AllLow();
 
@@ -41,12 +43,12 @@ private:	// Helpers
 	void LayersTop();
 	void LayersBottom();
 	void LayersMiddle();
-	
+
 	void EveryOtherColumn(bool bEven);
 	void ColumnsFL_BR();
-	void ColumnsBR_FL();
+	void ColumnsFR_BL();
 	void ColumnsMiddle();
-		
+
 	void LayerStack(int nStackTopLayer);
 };
 
