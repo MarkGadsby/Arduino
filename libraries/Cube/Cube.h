@@ -22,6 +22,9 @@ public:		// interface
 	void CheckerOdd(int mSec);
 	void CheckerEven(int mSec);
 
+	void BlockCheckerOdd(int mSec);
+	void BlockCheckerEven(int mSec);
+	
 private:	// data
 
 	// Column array
@@ -35,8 +38,15 @@ private:	// Helpers
 
 	void LayersEven();
 	void LayersOdd();
+	void LayersTop();
+	void LayersBottom();
+	void LayersMiddle();
+	
 	void EveryOtherColumn(bool bEven);
-
+	void ColumnsFL_BR();
+	void ColumnsBR_FL();
+	void ColumnsMiddle();
+		
 	void LayerStack(int nStackTopLayer);
 };
 

@@ -80,7 +80,7 @@ void CCube::LayerSweep()
 	}
 }
 
-void CCube::AlternateLayers()
+svoid CCube::AlternateLayers()
 {
 	int nHalfSecs = 10;
 	
@@ -129,6 +129,53 @@ void CCube::CheckerEven(int mSec)
 	} while(millis() < start + mSec);
 }
 
+void CCube::BlockCheckerOdd(int mSec)
+{
+	unsigned long start = millis();
+
+	do
+	{
+		AllLow();
+		LayersTop();
+		ColumnsFR_BL();
+		delay(1);
+		AllLow();
+		LayersBottom();
+		ColumnsFL_BR();
+		delay(1);
+	} while(millis() < start + mSec);
+}
+
+void BlockCheckerEven(int mSec)
+{
+	unsigned long start = millis();
+
+	do
+	{
+		AllLow();
+		LayersTop();
+		ColumnsFL_BR();
+		delay(1);
+		AllLow();
+		LayersBottom();
+		ColumnsFR_BL();
+		delay(1);
+	} while(millis() < start + mSec);
+}
+
+void MiddleBlock()
+{
+	int nHalfSecs = 10;
+	
+	while (nHalfSecs--)
+	{
+		AllLow();
+		LayersMiddle();
+		ColumnsMiddle();
+		delay(500);
+	}
+}
+
 void CCube::LayersOdd()
 {
 	digitalWrite(m_Layers[1], HIGH);
@@ -141,6 +188,23 @@ void CCube::LayersEven()
 	digitalWrite(m_Layers[2], HIGH);
 }
 
+void CCube::LayersTop()
+{
+	digitalWrite(m_Layers[2], HIGH);
+	digitalWrite(m_Layers[3], HIGH);
+}
+
+void CCube::LayersBottom()
+{
+	digitalWrite(m_Layers[0], HIGH);
+	digitalWrite(m_Layers[1], HIGH);
+}
+
+void CCube::LayersMiddle()
+{
+	digitalWrite(m_Layers[1], HIGH);
+	digitalWrite(m_Layers[2], HIGH);
+}
 void CCube::EveryOtherColumn(bool bEven)
 {
 	for (int y = 0; y < NUM_X_Y; y++)
@@ -163,6 +227,43 @@ void CCube::EveryOtherColumn(bool bEven)
 				if ((y % 2) && !(x % 2))
 					digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
 		 	}
+		}
+	}
+}
+
+void CCube::ColumnsFL_BR()
+{
+	for (int y = 0; y < NUM_X_Y; y++)
+	{
+		for (int x =0; x < NUM_X_Y; x++)
+		{
+			digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+		}
+	}
+}
+
+void CCube:: ColumnsBR_FL()
+{
+	for (int y = 0; y < NUM_X_Y; y++)
+	{
+		for (int x =0; x < NUM_X_Y; x++)
+		{
+			digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+		}
+	}
+}
+
+void CCube::ColumnsMiddle()
+{
+	for (int y = 0; y < NUM_X_Y; y++)
+	{
+		for (int x =0; x < NUM_X_Y; x++)
+		{
+			if ((x == 0 || x == 3) &&
+				(y == 0 || y == 3))
+			{
+				digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+			}
 		}
 	}
 }
