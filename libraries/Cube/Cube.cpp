@@ -17,7 +17,7 @@ CCube::CCube()
 CCube::~CCube()
 {
 }
-	
+
 ////////////////////////////////////////////////////////////////////////////////
 //	Function name	: CCube::AllLow
 //	Description		: Will set all pins to LOW which is an All Off state.
@@ -45,7 +45,7 @@ void CCube::AllLow()
 //	Function name	: CCube::AllHigh
 //	Description		: Will set all pins to HIGH which is an All Off state.
 //
-//						Switching the columns LOW from this state will turn 
+//						Switching the columns LOW from this state will turn
 //						individual columns on.
 //
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,21 +78,93 @@ void CCube::AllOn()
 	// all columns (negatives) low
 	while (i--)
 		digitalWrite(m_Columns[i], LOW);
-}		
+}
 
-void CCube::LightLayer(int nLayer)
+void CCube::LayersOdd()
+{
+	digitalWrite(m_Layers[1], HIGH);
+	digitalWrite(m_Layers[3], HIGH);
+}
+
+void CCube::LayersEven()
+{
+	digitalWrite(m_Layers[0], HIGH);
+	digitalWrite(m_Layers[2], HIGH);
+}
+
+void CCube::CheckerEven(int mSec)
+{
+	unsigned long start = millis();
+
+	do
+	{
+		AllLow();
+		LayersEven();
+		EveryOtherColumn(false);
+		delay(1);
+		AllLow();
+		LayersOdd();
+		EveryOtherColumn(true);
+		delay(1);
+	} while(millis() < start + mSec);
+}
+
+void CCube::CheckerOdd(int mSec)
+{
+	unsigned long start = millis();
+
+	do
+	{
+		AllLow();
+    LayersOdd();
+    EveryOtherColumn(false);
+    delay(1);
+    AllLow();
+    LayersEven();
+    EveryOtherColumn(true);
+    delay(1);
+	} while(millis() < start + mSec);
+}
+
+void CCube::EveryOtherColumn(bool bEven)
+{
+	for (int y = 0; y < NUM_X_Y; y++)
+	{
+			for (int x =0; x < NUM_X_Y; x++)
+			{
+				 if (bEven)
+				 {
+					 if (!(y % 2) && !(x % 2))
+	 					digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+
+	 				if ((y % 2) && (x % 2))
+	 					digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+				 }
+				 else
+				 {
+					 if (!(y % 2) && (x % 2))
+						 digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+
+					 if ((y % 2) && !(x % 2))
+						 digitalWrite(m_Columns[(y * NUM_X_Y) + x], HIGH);
+				 	}
+			}
+	 }
+}
+
+void CCube::LayerStack(int nStackTopLayer)
 {
   AllLow();
 
-  if (nLayer / 4 == 0)
+  if (nStackTopLayer / 4 == 0)
   {
-    while (nLayer--)
-      digitalWrite(m_Layers[nLayer], HIGH);
+    while (nStackTopLayer--)
+      digitalWrite(m_Layers[nStackTopLayer], HIGH);
   }
   else
   {
-    int shiftVal = nLayer % 4;
-    int index = 8 - nLayer;
+    int shiftVal = nStackTopLayer % 4;
+    int index = 8 - nStackTopLayer;
 
     while (index--)
       digitalWrite(m_Layers[index + shiftVal], HIGH);
@@ -105,24 +177,17 @@ void CCube::LayerSweep()
 
   while(layer <= 7)
   {
-    LightLayer(layer++);
-    delay(150);
-  }  
+    LayerStack(layer++);
+    delay(500);
+  }
 
   layer--;
 
   while(layer >= 1)
   {
-    LightLayer(layer--);
-    delay(150); 
+    LayerStack(layer--);
+    delay(150);
   }
-}
-
-void CCube::SnakeForwardBackward()
-{
-	AllHigh();			// all off
-	SnakeForward();		// all on
-	SnakeBackward();	// all off
 }
 
 void CCube::EachColumnsLine()
@@ -130,10 +195,10 @@ void CCube::EachColumnsLine()
 	AllHigh();			// all off
 	int y = 0;
 
-	while (y <= 3) // y == 0,1,2 & 3 
+	while (y <= 3) // y == 0,1,2 & 3
 	{
 		int x = 0;
-		while (x <= 3) // x == 0,1,2 & 3 
+		while (x <= 3) // x == 0,1,2 & 3
 		{
 			// Set individual column low
 			digitalWrite(m_Columns[x + (y * NUM_X_Y)], LOW);
@@ -141,68 +206,5 @@ void CCube::EachColumnsLine()
 			x++;
 		}
 		y++;
-	}
-}
-
-void CCube::SnakeForward()
-{
-	int x = 0;
-	int y = 0;
-
-	while (y <= 3) // y == 0,1,2 & 3 
-	{
-		// So the x axis does the 'snaking'
-		if (x == 0)
-		{
-			while (x <= 3) // x == 0,1,2 & 3 
-			{
-				// Set individual column low
-				digitalWrite(m_Columns[x + (y * NUM_X_Y)], LOW);
-				delay(150);
-				x++;
-			}
-		}
-		else if (x == 3)
-		{
-			while (x >= 0) // x == 3,2,1 & 0 
-			{
-				// Set individual column low
-				digitalWrite(m_Columns[x + (y * NUM_X_Y)], LOW);
-				delay(150);
-				x--;
-			}
-		}
-		y++;
-	}
-}
-
-void CCube::SnakeBackward()
-{
-	int x = 3;
-	int y = 3;
-
-	while (y >= 0) // y == 3,2,1 & 0 
-	{
-		if (x == 3)
-		{
-			while (x >= 0) // x == 3,2,1 & 0 
-			{
-				// Set individual column high
-				digitalWrite(m_Columns[x + (y * NUM_X_Y)], HIGH);
-				delay(150);
-				x--;
-			}
-		}
-		else if (x == 0)
-		{
-			while (x <= 3) // x == 0,1,2 & 3 
-			{
-				// Set individual column low
-				digitalWrite(m_Columns[x + (y * NUM_X_Y)], HIGH);
-				delay(150);
-				x++;
-			}
-		}
-		y--;
 	}
 }

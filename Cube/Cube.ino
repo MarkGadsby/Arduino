@@ -8,5 +8,7 @@ void setup()
 
 void loop()
 {
-  cube.EachColumnsLine();
+    cube.LayerSweep();
+    cube.CheckerEven(500);
+    cube.CheckerOdd(500);
 }
