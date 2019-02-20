@@ -9,33 +9,35 @@ const int NUM_X_Y = 4;
 
 class CCube
 {
-	public:
-		CCube();
-		virtual ~CCube();
+public:		// interface
+	CCube();
+	virtual ~CCube();
 
-		void AllOn();
-		void AllLow();
-		void AllHigh();
-		void LayerSweep();
-		void EachColumnsLine();
+	void AllOn();
+	void AllOff();
 
-		void CheckerOdd(int mSec);
-		void CheckerEven(int mSec);
+	void LayerSweep();
+	void AlternateLayers();
+	
+	void CheckerOdd(int mSec);
+	void CheckerEven(int mSec);
 
-	private:
+private:	// data
 
-		void LayersEven();
-		void LayersOdd();
-		void EveryOtherColumn(bool bEven);
+	// Column array
+	int m_Columns[NUMCOLS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, A0, A1};
 
-		void LayerStack(int nStackTopLayer);
-		void SnakeBackward();
+	// Layer array
+	int m_Layers[NUMLAYS] = {A2, A3, A4, A5};
+	
+private:	// Helpers
+	void AllLow();
 
-		// Column array
-		int m_Columns[NUMCOLS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, A0, A1};
+	void LayersEven();
+	void LayersOdd();
+	void EveryOtherColumn(bool bEven);
 
-		// Initialise the layer array
-		int m_Layers[NUMLAYS] = {A2, A3, A4, A5};
+	void LayerStack(int nStackTopLayer);
 };
 
 #endif // CUBE_H
