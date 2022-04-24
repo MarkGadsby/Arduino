@@ -1,4 +1,4 @@
-#include <Cube.h>
+#include "Cube.h"
 
 CCube cube;
 
@@ -8,33 +8,44 @@ void setup()
 
 void loop()
 {
-  cube.LayerSweep();
-  cube.LayerSweep();
+  cube.AllOn();
+
+  delay(10000);
+
+  int i = 5;
+
+  while(i--)
+  {
+    cube.LayerSweep();
+  }
  
   cube.MiddleBlock();
+  delay(1000);
  
-    int i = 5;
+  i = 5;
 
-    while(i--)
-    {
-      cube.CheckerEven(250);
-      cube.CheckerOdd(250);
-    }
+  while(i--)
+  {
+    cube.CheckerEven(250);
+    cube.CheckerOdd(250);
+  }
 
-    cube.MiddleBlock();
- 
-    i = 20;
+  cube.MiddleBlock();
 
-    while(i--)
-    {
-      cube.BlockCheckerOdd(500);
-      cube.BlockCheckerEven(500);
-    }
+  i = 20;
 
-    cube.MiddleBlock();
-    
-    cube.AlternateLayers();
+  while(i--)
+  {
+    cube.BlockCheckerOdd(500);
+    cube.BlockCheckerEven(500);
+  }
 
-    cube.MiddleBlock();
- 
+  cube.MiddleBlock();
+  delay(1000);
+
+  
+  cube.AlternateLayers();
+
+  cube.MiddleBlock();
+  delay(1000);
 }
